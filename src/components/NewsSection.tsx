@@ -1,4 +1,4 @@
-import { ArrowRight, Calendar, Tag } from 'lucide-react';
+import { ArrowRight, Calendar } from 'lucide-react';
 
 const news = [
   {
