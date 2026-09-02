@@ -14,9 +14,17 @@ const statusMeta: Record<SubstudyStatus, { color: string; bg: string; icon: Luci
 
 export default function SubstudiesSection() {
   const [status, setStatus] = useState<StatusFilter>('Todos');
+  const [visibleCount, setVisibleCount] = useState(6);
 
-  const visible =
+  const filteredData =
     status === 'Todos' ? substudies : substudies.filter(item => item.status === status);
+
+  const visible = filteredData.slice(0, visibleCount);
+
+  const handleStatusChange = (nextStatus: StatusFilter) => {
+    setStatus(nextStatus);
+    setVisibleCount(6);
+  };
 
   return (
     <section className="bg-[#f7f4ed] py-20 md:py-28" id="subestudios">
@@ -41,7 +49,7 @@ export default function SubstudiesSection() {
               return (
                 <button
                   key={filterLabel}
-                  onClick={() => setStatus(filterLabel)}
+                  onClick={() => handleStatusChange(filterLabel)}
                   aria-pressed={active}
                   className={`px-4 py-2 text-xs font-semibold rounded-sm border transition-colors ${
                     active
@@ -109,6 +117,18 @@ export default function SubstudiesSection() {
             );
           })}
         </div>
+
+        {/* Load more button */}
+        {visibleCount < filteredData.length && (
+          <div className="flex justify-center mt-10">
+            <button
+              onClick={() => setVisibleCount(prev => prev + 6)}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[#f08700] hover:bg-[#d97700] text-white text-sm font-bold rounded-sm transition-colors shadow-sm"
+            >
+              Ver más subestudios
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

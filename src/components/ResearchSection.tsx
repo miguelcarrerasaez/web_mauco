@@ -17,6 +17,7 @@ export default function ResearchSection() {
   const [query, setQuery] = useState('');
   const [year, setYear] = useState('all');
   const [area, setArea] = useState('all');
+  const [visibleCount, setVisibleCount] = useState(6);
 
   const filtered = useMemo(() => {
     return publications.filter(p => {
@@ -30,6 +31,13 @@ export default function ResearchSection() {
       return matchesQuery && matchesYear && matchesArea;
     });
   }, [query, year, area]);
+
+  const visible = filtered.slice(0, visibleCount);
+
+  const handleFilterChange = (updater: () => void) => {
+    updater();
+    setVisibleCount(6);
+  };
 
   return (
     <section className="bg-[#f4efde] py-20 md:py-28">
@@ -73,14 +81,14 @@ export default function ResearchSection() {
               <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#5a5f6b]" />
               <input
                 value={query}
-                onChange={e => setQuery(e.target.value)}
+                onChange={e => handleFilterChange(() => setQuery(e.target.value))}
                 placeholder="Buscar por título, autor o revista"
                 className="w-full bg-white border border-[#e5e1d8] focus:border-[#006380] outline-none rounded-sm pl-10 pr-4 py-2.5 text-sm"
               />
             </div>
             <select
               value={year}
-              onChange={e => setYear(e.target.value)}
+              onChange={e => handleFilterChange(() => setYear(e.target.value))}
               className="bg-white border border-[#e5e1d8] focus:border-[#006380] outline-none rounded-sm px-3 py-2.5 text-sm text-[#1e1f26]"
             >
               <option value="all">Año: Todos</option>
@@ -88,7 +96,7 @@ export default function ResearchSection() {
             </select>
             <select
               value={area}
-              onChange={e => setArea(e.target.value)}
+              onChange={e => handleFilterChange(() => setArea(e.target.value))}
               className="bg-white border border-[#e5e1d8] focus:border-[#006380] outline-none rounded-sm px-3 py-2.5 text-sm text-[#1e1f26]"
             >
               <option value="all">Área: Todas</option>
@@ -97,7 +105,7 @@ export default function ResearchSection() {
           </div>
 {/* Results summary */}
           <p className="text-sm text-[#5a5f6b] mb-4">
-            Se muestran {filtered.length} {filtered.length === 1 ? 'publicación' : 'publicaciones'} de {publications.length}.
+            Se muestran {visible.length} {visible.length === 1 ? 'publicación' : 'publicaciones'} de {filtered.length}.
           </p>
 
           {/* Results */}
@@ -107,7 +115,7 @@ export default function ResearchSection() {
                 No se encontraron publicaciones con los criterios seleccionados.
               </div>
             )}
-            {filtered.map(({ id, title, authors, journal, year: py, doi, researchAreas: ra }) => (
+            {visible.map(({ id, title, authors, journal, year: py, doi, researchAreas: ra }) => (
               <article key={id} className="group bg-white border border-[#e5e1d8] hover:border-[#006380] rounded-sm p-6 transition-all hover:shadow-md">
                 <h3 className="font-bold text-[#1e1f26] leading-snug mb-2 group-hover:text-[#006380] transition-colors">{title}</h3>
                 <p className="text-sm text-[#5a5f6b] mb-2">{authors.join(', ')}</p>
@@ -128,6 +136,18 @@ export default function ResearchSection() {
               </article>
             ))}
           </div>
+
+          {/* Load more button */}
+          {visibleCount < filtered.length && (
+            <div className="flex justify-center mt-8">
+              <button
+                onClick={() => setVisibleCount(prev => prev + 6)}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-[#f08700] hover:bg-[#d97700] text-white text-sm font-bold rounded-sm transition-colors shadow-sm"
+              >
+                Ver más publicaciones
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </section>
