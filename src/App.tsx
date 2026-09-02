@@ -7,8 +7,10 @@ import ResearchersSection from '@/components/ResearchersSection';
 import BiobankSection from '@/components/BiobankSection';
 import CollaborationSection from '@/components/CollaborationSection';
 import ResearchSection from '@/components/ResearchSection';
+import SubstudiesSection from '@/components/SubstudiesSection';
 import TeamSection from '@/components/TeamSection';
-import AboutBand from '@/components/AboutBand';
+import AboutSection from '@/components/AboutSection';
+import StudyInfoSection from '@/components/StudyInfoSection';
 import NewsSection from '@/components/NewsSection';
 import Footer from '@/components/Footer';
 
@@ -27,8 +29,10 @@ export default function App() {
         <BiobankSection />
         <CollaborationSection />
         <ResearchSection />
+        <SubstudiesSection />
         <TeamSection />
-        <AboutBand />
+        <AboutSection />
+        <StudyInfoSection />
         <NewsSection />
       </main>
       <Footer />

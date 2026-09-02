@@ -1,62 +1,32 @@
-import { Globe, GraduationCap, Building2, ExternalLink } from 'lucide-react';
-import type { TeamMember, TeamCategory } from '@/types/mauco';
-
-const team: TeamMember[] = [
-  {
-    id: 't-1',
-    name: 'Dra. Catterina Ferreccio',
-    role: 'Investigadora Principal',
-    category: 'Dirección y liderazgo científico',
-    institution: 'Pontificia Universidad Católica de Chile',
-    researchArea: 'Epidemiología del cáncer y enfermedades crónicas',
-  },
-  {
-    id: 't-2',
-    name: 'Dr. Juan Carlos Roa',
-    role: 'Jefe de Biobanco',
-    category: 'Coordinación y equipo profesional',
-    institution: 'Pontificia Universidad Católica de Chile',
-    researchArea: 'Anatomía patológica y biobancos',
-  },
-  {
-    id: 't-3',
-    name: 'Dra. Sandra Cortés',
-    role: 'Investigadora Asociada',
-    category: 'Investigadores',
-    institution: 'Pontificia Universidad Católica de Chile',
-    researchArea: 'Salud ambiental y exposición a plaguicidas',
-  },
-  {
-    id: 't-4',
-    name: 'Dra. Claudia Bambs',
-    role: 'Investigadora y Directora',
-    category: 'Investigadores',
-    institution: 'Universidad de Chile',
-    researchArea: 'Salud cardiovascular',
-  },
-];
+import { Globe, GraduationCap, Building2, ExternalLink, Crown, Microscope, ClipboardList, Database, Users, Handshake, type LucideIcon } from 'lucide-react';
+import { teamMembers } from '@/data/maucoData';
+import type { TeamCategory } from '@/types/mauco';
 
 const categoryOrder: TeamCategory[] = [
   'Dirección y liderazgo científico',
   'Investigadores',
   'Coordinación y equipo profesional',
+  'Data management',
+  'Equipo de terreno',
   'Colaboradores',
 ];
 
-const categoryAccents: Record<TeamCategory, string> = {
-  'Dirección y liderazgo científico': '#006380',
-  'Investigadores': '#08b3e7',
-  'Coordinación y equipo profesional': '#f08700',
-  'Colaboradores': '#5a5f6b',
+const categoryMeta: Record<TeamCategory, { accent: string; icon: LucideIcon }> = {
+  'Dirección y liderazgo científico': { accent: '#006380', icon: Crown },
+  'Investigadores': { accent: '#08b3e7', icon: Microscope },
+  'Coordinación y equipo profesional': { accent: '#f08700', icon: ClipboardList },
+  'Data management': { accent: '#0d8bb0', icon: Database },
+  'Equipo de terreno': { accent: '#5a5f6b', icon: Users },
+  'Colaboradores': { accent: '#004c5f', icon: Handshake },
 };
 
 const grouped = categoryOrder
-  .map(cat => ({ cat, members: team.filter(m => m.category === cat) }))
+  .map(cat => ({ cat, members: teamMembers.filter(m => m.category === cat) }))
   .filter(group => group.members.length > 0);
 
 export default function TeamSection() {
   return (
-    <section className="bg-white py-20 md:py-28">
+    <section className="bg-white py-20 md:py-28" id="equipo">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div className="max-w-3xl mb-14">
@@ -79,15 +49,18 @@ export default function TeamSection() {
 
         {/* Team by category */}
         {grouped.map(({ cat, members }) => {
-          const accent = categoryAccents[cat];
+          const { accent, icon: CatIcon } = categoryMeta[cat];
           return (
             <div key={cat} className="mb-12 last:mb-0">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-1.5 h-6 rounded-full" style={{ backgroundColor: accent }} />
+                <div className="w-9 h-9 rounded-sm flex items-center justify-center shrink-0" style={{ backgroundColor: `${accent}14`, color: accent }}>
+                  <CatIcon size={17} strokeWidth={1.9} />
+                </div>
                 <h3 className="text-sm font-bold tracking-widest uppercase" style={{ color: accent }}>{cat}</h3>
                 <span className="text-xs text-[#5a5f6b]">({members.length})</span>
               </div>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
                 {members.map(m => (
                   <article
                     key={m.id}
@@ -97,11 +70,18 @@ export default function TeamSection() {
                       <div
                         className="w-11 h-11 rounded-sm flex items-center justify-center text-lg font-bold text-white shrink-0"
                         style={{ backgroundColor: accent }}
+                        aria-hidden="true"
                       >
-                        {m.name.replace(/^Dr(a)?\.?\s*/i, '').trim().split(' ').map(w => w[0]).slice(0, 2).join('')}
+                        {m.name.replace(/^Dr(a)?\.?\s*/i, '').trim().split(/\s+/).map(word => word[0]).slice(0, 2).join('')}
                       </div>
                       {m.orcid && (
-                        <a href={`https://orcid.org/${m.orcid}`} target="_blank" rel="noreferrer" className="text-[#5a5f6b] hover:text-[#006380]" aria-label={`ORCID de ${m.name}`}>
+                        <a
+                          href={`https://orcid.org/${m.orcid}`}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-[#5a5f6b] hover:text-[#006380]"
+                          aria-label={`ORCID de ${m.name}`}
+                        >
                           <ExternalLink size={14} />
                         </a>
                       )}

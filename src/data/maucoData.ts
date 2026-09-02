@@ -1,0 +1,613 @@
+import type {
+  Metric,
+  NewsEvent,
+  Publication,
+  StudyInfo,
+  Substudy,
+  TeamMember,
+} from '@/types/mauco';
+
+/* Historia institucional de MAUCO (fuente: mmauco.org/?page_id=2307) */
+
+export interface HistoryMilestone {
+  year: string;
+  title: string;
+  description: string;
+}
+
+export interface AboutStory {
+  eyebrow: string;
+  title: string;
+  paragraphs: string[];
+  stats: Metric[];
+  milestones: HistoryMilestone[];
+}
+
+export const aboutStory: AboutStory = {
+  eyebrow: 'Sobre MAUCO',
+  title: 'De una cohorte poblacional a una infraestructura científica',
+  paragraphs: [
+    'MAUCO nació en 2014 en Molina, Región del Maule, como uno de los primeros estudios de cohorte poblacional de Chile y de la región latinoamericana.',
+    'El estudio está diseñado para conocer la historia natural de las principales enfermedades crónicas — cardiovasculares, diabetes, obesidad, respiratorias, demencia y cáncer — junto con sus factores de riesgo en una comunidad agrícola.',
+    'Durante más de una década, el equipo ha integrado información longitudinal de salud, mediciones clínicas, muestras biológicas y vinculación con registros sanitarios, consolidando una infraestructura científica al servicio de la investigación y las políticas públicas.',
+  ],
+  stats: [
+    { id: 'st-1', value: '2014', label: 'Inicio del estudio' },
+    { id: 'st-2', value: '9.462', label: 'Participantes incorporados' },
+    { id: 'st-3', value: '12 años', label: 'Seguimiento longitudinal' },
+    { id: 'st-4', value: '430.000+', label: 'Alícuotas almacenadas' },
+  ],
+  milestones: [
+    { year: '2014', title: 'Inicio de la cohorte', description: 'Diseño del protocolo y primera evaluación basal en Molina.' },
+    { year: '2014-2020', title: 'Reclutamiento y evaluación basal', description: '9.462 participantes incorporados con cuestionarios, exámenes clínicos y muestras.' },
+    { year: '2017', title: 'Consolidación del biobanco', description: 'Almacenamiento de más de 430.000 alícuotas de suero, plasma, sangre y ADN.' },
+    { year: '2020', title: 'Centro Centinela COVID-19', description: 'Vinculación con registros de salud y seguimiento activo durante la pandemia.' },
+    { year: '2024', title: 'Más de una década', description: 'Primer ciclo de seguimiento completado y avance hacia la segunda etapa de evaluaciones.' },
+  ],
+};
+/* Publicaciones científicas (fuente: mmauco.org/?page_id=2869) */
+
+export const publications: Publication[] = [
+  {
+    id: 'pub-1',
+    title: 'Study protocol for the Maule Cohort (MAUCO) of chronic diseases, Chile 2014-2024',
+    authors: ['Ferreccio, C.', 'Roa, J.C.', 'Bambs, C.', 'Vives, A.', 'Corvalán, A.H.', 'Cortés, S.', 'Huidobro, A.'],
+    journal: 'BMC Public Health',
+    year: 2016,
+    doi: '10.1186/s12889-016-3047-8',
+    researchAreas: ['Cardiovascular', 'Cáncer', 'Metabólico', 'Salud ambiental'],
+  },
+  {
+    id: 'pub-2',
+    title: 'High Burden of Intestinal Colonization With Antimicrobial-Resistant Bacteria in Chile: An Antibiotic Resistance in Communities and Hospitals (ARCH) Study',
+    authors: ['Araos, R.', 'Smith, R.M.', 'Styczynski, A.', 'Ferreccio, C.', 'Munita, J.M.', 'Undurraga, E.A.'],
+    journal: 'Clinical Infectious Diseases',
+    year: 2023,
+    researchAreas: ['Infecciones', 'Salud pública'],
+  },
+  {
+    id: 'pub-3',
+    title: 'Chronic pain in Chile: first prevalence report of non cancer chronic pain, fibromyalgia, and neuropathic pain and its associated factors',
+    authors: ['Durán, J.', 'Tejos-Bravo, M.', 'Cid, V.', 'Ferreccio, C.', 'Calvo, M.'],
+    journal: 'Pain',
+    year: 2023,
+    researchAreas: ['Salud mental'],
+  },
+  {
+    id: 'pub-4',
+    title: 'The association between walking pace and grip strength and all-cause mortality: A prospective analysis from the MAUCO cohort',
+    authors: ['Petermann-Rocha, F.', 'Parra-Soto, S.', 'Cid, V.', 'Venegas, P.', 'Huidobro, A.', 'Ferreccio, C.', 'Celis-Morales, C.'],
+    journal: 'Maturitas',
+    year: 2021,
+    researchAreas: ['Cardiovascular', 'Envejecimiento', 'Metabólico'],
+  },
+  {
+    id: 'pub-5',
+    title: 'Processed meat consumption and associated factors in Chile: A cross-sectional study nested in the MAUCO cohort',
+    authors: ['Ruedlinger, J.', 'Cid-Ossandón, V.', 'Huidobro, A.', 'Van De Wyngard, V.', 'Vargas, C.', 'Ferreccio, C.'],
+    journal: 'Frontiers in Public Health',
+    year: 2021,
+    researchAreas: ['Alimentación', 'Metabólico', 'Cáncer'],
+  },
+  {
+    id: 'pub-6',
+    title: 'Transmission of gram-negative antibiotic-resistant bacteria following differing exposure to antibiotic-resistance reservoirs in a rural community: a modelling study for bloodstream infections',
+    authors: ['Allel, K.', 'Goscé, L.', 'Araos, R.', 'Toro, D.', 'Ferreccio, C.', 'Munita, J.M.', 'Undurraga, E.A.', 'Panovska-Griffiths, J.'],
+    journal: 'Scientific Reports',
+    year: 2023,
+    researchAreas: ['Infecciones', 'Salud pública'],
+  },
+  {
+    id: 'pub-7',
+    title: 'A preliminary study on aflatoxin exposure by urine biomonitoring in Chile',
+    authors: ['Foerster, C.', 'Monsalve, L.', 'Maldonado, C.', 'Cortés, S.', 'Ferreccio, C.'],
+    journal: 'Mycotoxin Research',
+    year: 2023,
+    researchAreas: ['Salud ambiental', 'Cáncer'],
+  },
+  {
+    id: 'pub-8',
+    title: 'Inflammatory profiles in Chilean Mapuche and non-Mapuche women with gallstones at risk of developing gallbladder cancer',
+    authors: ['Jackson, S.S.', 'Van De Wyngard, V.', 'Pfeiffer, R.M.', 'Cook, P.', 'Hildesheim, A.', 'Ferreccio, C.', 'Koshiol, J.'],
+    journal: 'Scientific Reports',
+    year: 2021,
+    doi: '10.1038/s41598-021-83300-2',
+    researchAreas: ['Cáncer', 'Genómica', 'Metabólico'],
+  },
+  {
+    id: 'pub-9',
+    title: 'Associations of six adiposity-related markers with incidence and mortality from 24 cancers — findings from the UK Biobank prospective cohort study',
+    authors: ['Parra-Soto, S.', 'Cowley, E.S.', 'Rezende, L.F.M.', 'Ferreccio, C.', 'Mathers, J.C.', 'Pell, J.P.', 'Ho, F.K.', 'Celis-Morales, C.'],
+    journal: 'BMC Medicine',
+    year: 2021,
+    researchAreas: ['Metabólico', 'Cáncer'],
+  },
+  {
+    id: 'pub-10',
+    title: 'Impact of Public Health Policies on Alcohol-Associated Liver Disease in Latin America: An Ecological Multinational Study',
+    authors: ['Díaz, L.A.', 'Idalsoaga, F.', 'Fuentes-López, E.', 'Ferreccio, C.', 'Arab, J.P.'],
+    journal: 'Hepatology',
+    year: 2023,
+    researchAreas: ['Metabólico', 'Salud pública'],
+  },
+  {
+    id: 'pub-11',
+    title: 'Obesity and excess weight in early adulthood and high risks of arsenic-related cancer in later life',
+    authors: ['Steinmaus, C.', 'Castriota, F.', 'Ferreccio, C.', 'Smith, A.H.', 'Yuan, Y.', 'Meza, R.', 'Calcagno, S.'],
+    journal: 'Environmental Research',
+    year: 2015,
+    researchAreas: ['Metabólico', 'Salud ambiental', 'Cáncer'],
+  },
+  {
+    id: 'pub-12',
+    title: 'Association of aflatoxin with gallbladder cancer in Chile',
+    authors: ['Nogueira, L.', 'Foerster, C.', 'Groopman, J.', 'Egner, P.', 'Koshiol, J.', 'Ferreccio, C.'],
+    journal: 'JAMA',
+    year: 2015,
+    researchAreas: ['Cáncer', 'Salud ambiental'],
+  },
+  {
+    id: 'pub-13',
+    title: 'Serological response to Helicobacter pylori infection among Latin American populations with contrasting risks of gastric cancer',
+    authors: ['Camargo, M.C.', 'Beltran, M.', 'Conde-Glez, C.J.', 'Harris, P.R.', 'Ferreccio, C.', 'Pawlita, M.', 'Rabkin, C.S.'],
+    journal: 'International Journal of Cancer',
+    year: 2016,
+    researchAreas: ['Cáncer', 'Infecciones'],
+  },
+  {
+    id: 'pub-14',
+    title: 'Chile Confronts its Environmental Health Future After 25 Years of Accelerated Growth',
+    authors: ['Pino, P.', 'Iglesias, V.', 'Garreaud, R.', 'Cortés, S.', 'Canals, M.', 'Levy, K.', 'Steenland, K.'],
+    journal: 'Annals of Global Health',
+    year: 2015,
+    researchAreas: ['Salud ambiental', 'Salud pública'],
+  },
+  {
+    id: 'pub-15',
+    title: 'A snapshot of cancer in Chile: analytical frameworks for developing a cancer policy',
+    authors: ['Jimenez de la Jara, J.', 'Ferreccio, C.', 'Moscoso, C.', 'Cid, C.', 'Herrera, C.', 'Nervi, B.', 'Corvalán, A.', 'Sullivan, R.', 'Owen, G.I.'],
+    journal: 'Biological Research',
+    year: 2015,
+    researchAreas: ['Cáncer', 'Salud pública'],
+  },
+  {
+    id: 'pub-16',
+    title: 'Tumor location is a strong predictor of tumor progression and survival in T2 gallbladder cancer: an international multicenter study',
+    authors: ['Shindoh, J.', 'de Aretxabala, X.', 'Aloia, T.A.', 'Roa, J.C.', 'Roa, I.', 'Vauthey, J.N.'],
+    journal: 'Annals of Surgery',
+    year: 2015,
+    researchAreas: ['Cáncer'],
+  },
+  {
+    id: 'pub-17',
+    title: 'The case for aflatoxins in the causal chain of gallbladder cancer',
+    authors: ['Foerster, C.', 'Koshiol, J.', 'Guerrero, A.R.', 'Kogan, M.J.', 'Ferreccio, C.'],
+    journal: 'Medical Hypotheses',
+    year: 2016,
+    researchAreas: ['Cáncer', 'Salud ambiental'],
+  },
+  {
+    id: 'pub-18',
+    title: 'Heart Failure in rural Communities',
+    authors: ['Verdejo, H.', 'Ferreccio, C.', 'Castro, P.'],
+    journal: 'Heart Failure Clinics',
+    year: 2016,
+    researchAreas: ['Cardiovascular'],
+  },
+];
+/* Sub-estudios de la cohorte (fuente: mmauco.org/?page_id=2461) */
+
+export const substudies: Substudy[] = [
+  {
+    id: 's-1',
+    title: 'Cardiovascular and Nonalcoholic fatty liver diseases among Gallstone and Cholecystectomy patients and impact of a novel diet and muscle training program (MAUCO+)',
+    principalInvestigator: 'Catterina Ferreccio',
+    objective: 'Evaluar la enfermedad cardiovascular y el hígado graso no alcohólico en pacientes con colelitiasis y colecistectomía, y el impacto de un programa de dieta y entrenamiento muscular.',
+    date: '2021-2024',
+    status: 'En curso',
+  },
+  {
+    id: 's-2',
+    title: 'Cohort to evaluate COVID-19 vaccine effectiveness in Chile',
+    principalInvestigator: 'Catterina Ferreccio',
+    objective: 'Evaluar la efectividad de la vacunación contra COVID-19 en la cohorte.',
+    date: '2021-2023',
+    status: 'En curso',
+  },
+  {
+    id: 's-3',
+    title: 'Kidney chronic disease: understanding its causality in agricultural communities',
+    principalInvestigator: 'Sandra Cortés',
+    objective: 'Comprender la causalidad de la enfermedad renal crónica en comunidades agrícolas.',
+    date: '2021-2024',
+    status: 'En curso',
+  },
+  {
+    id: 's-4',
+    title: 'Adaptación y validación del Cuestionario Internacional de Experiencias Adversas en la Niñez (ACE-IQ) en la cohorte MAUCO',
+    principalInvestigator: 'Carolina Velasco',
+    objective: 'Adaptar y validar el instrumento ACE-IQ para su uso en la población chilena.',
+    date: '2022-2024',
+    status: 'En curso',
+  },
+  {
+    id: 's-5',
+    title: 'Desarrollo de un algoritmo diagnóstico no-invasivo para hígado graso',
+    principalInvestigator: 'Sandra Cortés',
+    objective: 'Diseñar un algoritmo no invasivo para el diagnóstico de la enfermedad por hígado graso.',
+    date: '2022-2024',
+    status: 'En curso',
+  },
+  {
+    id: 's-6',
+    title: 'Salud dental y deterioro cognitivo en la cohorte MAUCO',
+    principalInvestigator: 'María Jesús Arenas',
+    objective: 'Estudiar la asociación entre salud dental y deterioro cognitivo en los adultos de la cohorte.',
+    date: '2022-2024',
+    status: 'En curso',
+  },
+  {
+    id: 's-7',
+    title: 'Genetic determinants of circulating bilirubin and its association with type 2 diabetes and gallstone disease',
+    principalInvestigator: 'José Patricio Miranda',
+    objective: 'Identificar determinantes genéticos de la bilirrubina circulante y su asociación con diabetes tipo 2 y colelitiasis.',
+    date: '2022-2024',
+    status: 'En curso',
+  },
+  {
+    id: 's-8',
+    title: 'Exposición a plaguicidas y efectos en salud en trabajadores agrícolas de la cohorte del Maule',
+    principalInvestigator: 'Sandra Cortés',
+    objective: 'Evaluar la asociación entre la exposición a plaguicidas y los efectos en salud de los trabajadores agrícolas.',
+    date: '2016-2019',
+    status: 'Completado',
+  },
+  {
+    id: 's-9',
+    title: 'Capacidad funcional, rendimiento físico y actividad física de los adultos mayores chilenos, sub muestra cohorte MAUCO',
+    principalInvestigator: 'Natalia Bustamante',
+    objective: 'Caracterizar la capacidad funcional y la actividad física de los adultos mayores de la cohorte.',
+    date: '2017-2020',
+    status: 'Completado',
+  },
+  {
+    id: 's-10',
+    title: 'Dermatological lesions in a Chilean agricultural population: Association with sun exposure and pesticides',
+    principalInvestigator: 'Natalia Sabatini',
+    objective: 'Describir las lesiones dermatológicas y su asociación con la exposición solar y los plaguicidas.',
+    date: '2017-2019',
+    status: 'Completado',
+  },
+  {
+    id: 's-11',
+    title: 'Tooth loss and chronic pluripathology in Molina',
+    principalInvestigator: 'Constanza Saka',
+    objective: 'Analizar la pérdida dentaria y su relación con la pluripatología crónica en la cohorte.',
+    date: '2017-2019',
+    status: 'Completado',
+  },
+  {
+    id: 's-12',
+    title: 'Optimization of adherence and follow-up in longitudinal studies: a qualitative study based on the social representation of the MAUCO cohort',
+    principalInvestigator: 'Carolina López',
+    objective: 'Optimizar la adherencia y el seguimiento mediante el estudio de la representación social de la cohorte.',
+    date: '2018-2020',
+    status: 'Completado',
+  },
+  {
+    id: 's-13',
+    title: 'Prevalencia y fuentes de exposición a aflatoxina en una población con alto riesgo de cánceres de vesícula biliar y estómago',
+    principalInvestigator: 'Claudia Foerster',
+    objective: 'Estimar la prevalencia y las fuentes de exposición a aflatoxina en la población de alto riesgo.',
+    date: '2018-2021',
+    status: 'Completado',
+  },
+  {
+    id: 's-14',
+    title: 'Centro Centinela COVID-19',
+    principalInvestigator: 'Catterina Ferreccio',
+    objective: 'Vigilancia epidemiológica y estudio de la COVID-19 en la cohorte.',
+    date: '2020-2021',
+    status: 'Completado',
+  },
+];
+/* Noticias y eventos (fuentes: mmauco.org/?page_id=2309 y /?page_id=2408) */
+
+export const newsEvents: NewsEvent[] = [
+  {
+    id: 'ne-1',
+    type: 'news',
+    title: 'Nueva publicación: Air pollution and environmental epidemiological evidence in Chile: alerts for decision-makers and citizens',
+    excerpt: 'La investigadora Dra. Sandra Cortés publicó este ensayo sobre la evidencia epidemiológica de la contaminación del aire en Chile y sus alertas para tomadores de decisiones y ciudadanos.',
+    date: '28 diciembre 2023',
+    link: '#',
+  },
+  {
+    id: 'ne-2',
+    type: 'event',
+    title: 'Invitación a la 5° Cuenta Pública de MAUCO: Salud y Medio Ambiente en Molina',
+    excerpt: 'La comunidad está invitada a la Cuenta Pública de MAUCO, que se realizará en el Teatro Municipal de Molina para presentar los avances del estudio.',
+    date: '28 diciembre 2023',
+    link: '#',
+  },
+  {
+    id: 'ne-3',
+    type: 'news',
+    title: '¿Qué son los químicos disruptores endocrinos (EDCs) y cómo se vinculan con nuestras enfermedades crónicas?',
+    excerpt: 'La Dra. Sandra Cortés explica qué son los disruptores endocrinos y su posible relación con la salud de la población, a partir del trabajo de la cohorte.',
+    date: '25 agosto 2023',
+    link: '#',
+  },
+  {
+    id: 'ne-4',
+    type: 'event',
+    title: 'Simposio: Cáncer hepatobiliar: actualización al 2022',
+    excerpt: 'Evento auspiciado por el proyecto de cooperación Escalon de la Comunidad Europea, con la participación de especialistas clínicos e investigadores del área.',
+    date: '9 diciembre 2022',
+    link: '#',
+  },
+  {
+    id: 'ne-5',
+    type: 'news',
+    title: 'Por primera vez un centro de investigación, la educación y la salud se unen por la ciencia',
+    excerpt: 'Por tercer año consecutivo, el Hospital Santa Rosa de Molina y el Centro Avanzado de Enfermedades Crónicas (ACCDiS) —y por primera vez el Liceo Bicentenario— trabajan junto a la comunidad.',
+    date: '3 julio 2023',
+    link: '#',
+  },
+  {
+    id: 'ne-6',
+    type: 'event',
+    title: 'Convocatoria tesistas pre y postgrado: Proyecto Fondecyt sobre enfermedad renal crónica en la cohorte del Maule',
+    excerpt: 'Se busca tesista para estudiar la enfermedad renal crónica en la cohorte del Maule bajo la tutela de la Dra. Sandra Cortés.',
+    date: '9 diciembre 2022',
+    link: '#',
+  },
+];
+/* Equipo de investigación (fuente: mmauco.org/?page_id=2475) */
+
+export const teamMembers: TeamMember[] = [
+  {
+    id: 'tm-1',
+    name: 'Dra. Claudia Bambs',
+    role: 'Directora MAUCO',
+    category: 'Dirección y liderazgo científico',
+    institution: 'Pontificia Universidad Católica de Chile',
+    researchArea: 'Salud cardiovascular y salud pública',
+  },
+  {
+    id: 'tm-2',
+    name: 'Dra. Catterina Ferreccio',
+    role: 'Investigadora Principal',
+    category: 'Dirección y liderazgo científico',
+    institution: 'Pontificia Universidad Católica de Chile',
+    researchArea: 'Epidemiología del cáncer y enfermedades crónicas',
+  },
+  {
+    id: 'tm-3',
+    name: 'Dra. Sandra Cortés',
+    role: 'Investigadora Asociada',
+    category: 'Investigadores',
+    institution: 'Pontificia Universidad Católica de Chile',
+    researchArea: 'Salud ambiental y exposición a plaguicidas',
+  },
+  {
+    id: 'tm-4',
+    name: 'Dr. Juan Carlos Araya',
+    role: 'Investigador Asociado',
+    category: 'Investigadores',
+    institution: 'Pontificia Universidad Católica de Chile',
+  },
+  {
+    id: 'tm-5',
+    name: 'Dr. Marco Arrese',
+    role: 'Investigador Asociado',
+    category: 'Investigadores',
+    institution: 'Pontificia Universidad Católica de Chile',
+    researchArea: 'Hepatología y enfermedades metabólicas',
+  },
+  {
+    id: 'tm-6',
+    name: 'Dr. Pablo Toro',
+    role: 'Investigador Asociado',
+    category: 'Investigadores',
+    institution: 'Pontificia Universidad Católica de Chile',
+  },
+  {
+    id: 'tm-7',
+    name: 'Dra. Jenny Ruedlinger',
+    role: 'Investigadora Postdoctorado',
+    category: 'Investigadores',
+    institution: 'Pontificia Universidad Católica de Chile',
+    researchArea: 'Inflamación crónica y dieta',
+  },
+  {
+    id: 'tm-8',
+    name: 'Macarena Garrido',
+    role: 'Coordinadora Administrativa',
+    category: 'Coordinación y equipo profesional',
+    institution: 'Pontificia Universidad Católica de Chile',
+  },
+  {
+    id: 'tm-9',
+    name: 'Ian Reyes',
+    role: 'Encargado de Biobanco',
+    category: 'Coordinación y equipo profesional',
+    institution: 'Pontificia Universidad Católica de Chile',
+  },
+  {
+    id: 'tm-10',
+    name: 'Cristián Herrera',
+    role: 'Administrador de Bases de Datos',
+    category: 'Data management',
+    institution: 'Pontificia Universidad Católica de Chile',
+  },
+  {
+    id: 'tm-11',
+    name: 'Claudia Marco',
+    role: 'Coordinadora de Gestión de Datos',
+    category: 'Data management',
+    institution: 'Pontificia Universidad Católica de Chile',
+  },
+  {
+    id: 'tm-12',
+    name: 'Franco Godoy',
+    role: 'Ingeniero en Estadística',
+    category: 'Data management',
+    institution: 'Pontificia Universidad Católica de Chile',
+  },
+  {
+    id: 'tm-13',
+    name: 'Matías Pozo',
+    role: 'Analista de Datos y Muestras',
+    category: 'Data management',
+    institution: 'Pontificia Universidad Católica de Chile',
+  },
+  {
+    id: 'tm-14',
+    name: 'Jeniffer Loyola',
+    role: 'Coordinadora de Terreno',
+    category: 'Equipo de terreno',
+    institution: 'Molina, Región del Maule',
+  },
+  {
+    id: 'tm-15',
+    name: 'Cristian Pinto',
+    role: 'Analista Computacional',
+    category: 'Equipo de terreno',
+    institution: 'Molina, Región del Maule',
+  },
+  {
+    id: 'tm-16',
+    name: 'Daniela Poblete',
+    role: 'TENS — Evaluaciones',
+    category: 'Equipo de terreno',
+    institution: 'Molina, Región del Maule',
+  },
+  {
+    id: 'tm-17',
+    name: 'Paola Correa',
+    role: 'Tecnólogo Médico — Laboratorio',
+    category: 'Equipo de terreno',
+    institution: 'Molina, Región del Maule',
+  },
+  {
+    id: 'tm-18',
+    name: 'Laura Andrea Huidobro',
+    role: 'Epidemióloga — Responsable Local',
+    category: 'Equipo de terreno',
+    institution: 'Molina, Región del Maule',
+  },
+  {
+    id: 'tm-19',
+    name: 'Dra. Claudia Foerster',
+    role: 'Colaboradora',
+    category: 'Colaboradores',
+    institution: 'Pontificia Universidad Católica de Chile',
+    researchArea: 'Salud ambiental y aflatoxinas',
+  },
+  {
+    id: 'tm-20',
+    name: 'Dr. Rafael Araos',
+    role: 'Colaborador',
+    category: 'Colaboradores',
+    institution: 'Pontificia Universidad Católica de Chile',
+    researchArea: 'Enfermedades infecciosas y resistencia antimicrobiana',
+  },
+];
+
+/* Información general del estudio (fuente: mmauco.org/?page_id=2540) */
+
+export const studyInfo: StudyInfo = {
+  metodologia: [
+    {
+      id: 'm-1',
+      title: 'Cuestionario de salud',
+      content: [
+        'Historia de salud, cirugías, accidentes y uso de medicamentos.',
+        'Alimentación, hábitos y características del ambiente donde vive y trabaja.',
+        'Duración aproximada: 2 horas.',
+      ],
+    },
+    {
+      id: 'm-2',
+      title: 'Examen físico',
+      content: [
+        'Medición de altura, peso, perímetro de cuello y cintura, y presión arterial.',
+        'Evaluación de ojos, boca y oídos.',
+        'Pruebas de equilibrio, coordinación y condición física.',
+        'Duración aproximada: 30 minutos.',
+      ],
+    },
+    {
+      id: 'm-3',
+      title: 'Exámenes de laboratorio',
+      content: [
+        'Muestra de 20 cc de sangre, orina (aproximadamente un cuarto de taza), saliva y pelo.',
+        'Procesamiento inmediato de glicemia, perfil lipídico y perfil hepático.',
+        'Entrega de resultados en un plazo de 30 días.',
+        'Duración aproximada: 30 minutos.',
+      ],
+    },
+    {
+      id: 'm-4',
+      title: 'Seguimiento',
+      content: [
+        'Tres evaluaciones en los primeros 5 años (visitas a los 2 y a los 5 años).',
+        'Re-consentimiento para continuar en contacto por otros 5 años.',
+        'Vinculación con registros de hospitalizaciones, diagnósticos, cáncer y mortalidad.',
+      ],
+    },
+  ],
+  poblacion: [
+    {
+      id: 'p-1',
+      title: 'Criterios de inclusión',
+      content: [
+        'Residentes de la comuna de Molina, Región del Maule.',
+        'Adultos entre 38 y 74 años al momento de la invitación.',
+        'Intención de permanecer en la comuna durante el período de seguimiento.',
+      ],
+    },
+    {
+      id: 'p-2',
+      title: 'Tamaño esperado',
+      content: [
+        'Meta de 10.000 participantes, representativos de la población adulta.',
+        'Reclutamiento basado en el registro de beneficiarios del sistema de salud.',
+      ],
+    },
+    {
+      id: 'p-3',
+      title: 'Reclutamiento y estado actual',
+      content: [
+        'Captación realizada entre 2014 y 2020.',
+        '9.462 participantes incorporados a la cohorte.',
+        'Distribución por sexo: 54,5% mujeres y 45,5% hombres.',
+      ],
+    },
+  ],
+  objetivos: [
+    {
+      id: 'o-1',
+      title: 'Historia natural',
+      content: [
+        'Estudiar la incidencia y evolución de enfermedades crónicas: cardiovasculares, diabetes, obesidad, respiratorias, demencia y cáncer.',
+      ],
+    },
+    {
+      id: 'o-2',
+      title: 'Determinantes',
+      content: [
+        'Identificar factores de riesgo personales, ambientales, alimentarios y laborales asociados a estas enfermedades.',
+      ],
+    },
+    {
+      id: 'o-3',
+      title: 'Referencia regional',
+      content: [
+        'Constituir un modelo de referencia en salud del adulto para Chile y otros países de la región.',
+        'Aportar evidencia para políticas públicas de prevención y control.',
+      ],
+    },
+  ],
+};

@@ -1,91 +1,97 @@
-import { ArrowRight, Calendar } from 'lucide-react';
+import { useState } from 'react';
+import { ArrowRight, Calendar, Newspaper, CalendarDays } from 'lucide-react';
+import { newsEvents } from '@/data/maucoData';
+import type { NewsEvent } from '@/types/mauco';
 
-const news = [
-  {
-    category: 'Resultados',
-    date: '18 agosto 2026',
-    title: 'MAUCO publica resultados sobre prevalencia de diabetes tipo 2 en la Región del Maule',
-    excerpt:
-      'El equipo investigador presenta los primeros datos de seguimiento a diez años sobre enfermedades metabólicas en la cohorte rural-urbana del estudio.',
-    image: 'https://images.pexels.com/photos/15831822/pexels-photo-15831822.jpeg?auto=compress&cs=tinysrgb&h=400&w=700',
-    alt: 'Scientist in laboratory',
-  },
-  {
-    category: 'Comunidad',
-    date: '5 agosto 2026',
-    title: 'Más de 500 nuevos participantes se incorporan al estudio en la provincia de Linares',
-    excerpt:
-      'La campaña de reclutamiento en comunidades rurales de Linares supera las expectativas, sumando nuevas familias al seguimiento longitudinal de MAUCO.',
-    image: 'https://images.pexels.com/photos/8248293/pexels-photo-8248293.jpeg?auto=compress&cs=tinysrgb&h=400&w=700',
-    alt: 'Healthcare worker with community member',
-  },
-  {
-    category: 'Investigación',
-    date: '21 julio 2026',
-    title: 'Nuevo acuerdo de colaboración con la Universidad de Chile potencia las capacidades del biobanco',
-    excerpt:
-      'El convenio permite el procesamiento de biomuestras adicionales y amplía el análisis genómico de la cohorte a nivel nacional e internacional.',
-    image: 'https://images.pexels.com/photos/8533040/pexels-photo-8533040.jpeg?auto=compress&cs=tinysrgb&h=400&w=700',
-    alt: 'Medical research collaboration',
-  },
+type Filter = 'todas' | NewsEvent['type'];
+
+const filters: { id: Filter; label: string }[] = [
+  { id: 'todas', label: 'Todas' },
+  { id: 'news', label: 'Noticias' },
+  { id: 'event', label: 'Eventos' },
 ];
 
-const categoryColors: Record<string, string> = {
-  Resultados: '#006380',
-  Comunidad: '#f08700',
-  Investigación: '#08b3e7',
+const typeMeta: Record<NewsEvent['type'], { label: string; accent: string }> = {
+  news: { label: 'Noticia', accent: '#08b3e7' },
+  event: { label: 'Evento', accent: '#f08700' },
 };
 
 export default function NewsSection() {
+  const [filter, setFilter] = useState<Filter>('todas');
+
+  const visible =
+    filter === 'todas' ? newsEvents : newsEvents.filter(item => item.type === filter);
+
   return (
-    <section className="bg-[#f4efde] py-20 md:py-28">
+    <section className="bg-[#f4efde] py-20 md:py-28" id="noticias">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-          <div>
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+          <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 mb-3">
               <div className="w-1.5 h-5 bg-[#f08700] rounded-full" />
               <span className="text-xs font-bold tracking-widest text-[#f08700] uppercase">Noticias y Comunidad</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#1e1f26] tracking-tight">
-              Últimos Avances e Impacto
+            <h2 className="text-3xl md:text-4xl font-extrabold text-[#1e1f26] tracking-tight leading-tight">
+              Nuevas publicaciones, proyectos y financiamiento
             </h2>
-            <p className="mt-3 text-[#5a5f6b] max-w-lg leading-relaxed">
-              Resultados, hitos comunitarios y colaboraciones que marcan el avance de MAUCO y su impacto en salud pública.
+            <p className="mt-3 text-[#5a5f6b] leading-relaxed">
+              Noticias y eventos que marcan el avance de MAUCO y su impacto en salud pública.
             </p>
           </div>
           <a
             href="#"
             className="shrink-0 inline-flex items-center gap-2 text-sm font-semibold text-[#f08700] hover:text-[#006380] transition-colors group"
           >
-            Ver todas las noticias
+            Ver el archivo completo
             <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
           </a>
         </div>
 
-        {/* News grid */}
-        <div className="grid md:grid-cols-3 gap-6">
-          {news.map(({ category, date, title, excerpt, image, alt }) => {
-            const accentColor = categoryColors[category] ?? '#006380';
+        {/* Filter pills */}
+        <div className="flex flex-wrap gap-2 mb-10" role="group" aria-label="Filtrar por tipo">
+          {filters.map(({ id, label }) => {
+            const active = filter === id;
+            return (
+              <button
+                key={id}
+                onClick={() => setFilter(id)}
+                aria-pressed={active}
+                className={`px-4 py-2 text-xs font-semibold rounded-sm border transition-colors ${
+                  active
+                    ? 'bg-[#006380] border-[#006380] text-white shadow-sm'
+                    : 'bg-white border-[#e5e1d8] text-[#5a5f6b] hover:border-[#006380] hover:text-[#006380]'
+                }`}
+              >
+                {label}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* News/Events grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {visible.map(({ id, type, title, excerpt, date, link }) => {
+            const meta = typeMeta[type];
             return (
               <article
-                key={title}
-                className="group bg-white rounded-sm overflow-hidden border border-[#e5e1d8] hover:border-transparent hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col"
+                key={id}
+                className="group bg-white rounded-sm overflow-hidden border border-[#e5e1d8] hover:border-[#006380] hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 flex flex-col"
               >
-                {/* Image */}
-                <div className="relative h-48 overflow-hidden bg-[#e5e1d8]">
-                  <img
-                    src={image}
-                    alt={alt}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-                  <span
-                    className="absolute bottom-3 left-3 text-[11px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-sm text-white"
-                    style={{ backgroundColor: accentColor }}
-                  >
-                    {category}
+                {/* Visual header */}
+                <div
+                  className="relative h-40 overflow-hidden text-white flex items-center justify-center"
+                  style={{ backgroundColor: meta.accent }}
+                >
+                  <div className="absolute inset-0 opacity-10 flex items-center justify-center">
+                    {type === 'news' ? (
+                      <Newspaper size={42} strokeWidth={1.3} className="text-white" />
+                    ) : (
+                      <CalendarDays size={42} strokeWidth={1.3} className="text-white" />
+                    )}
+                  </div>
+                  <span className="absolute bottom-3 left-3 text-[11px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-sm text-white bg-black/25">
+                    {meta.label}
                   </span>
                 </div>
 
@@ -95,24 +101,27 @@ export default function NewsSection() {
                     <Calendar size={12} />
                     <span>{date}</span>
                   </div>
-
                   <h3 className="font-bold text-[#1e1f26] leading-snug text-base group-hover:text-[#006380] transition-colors">
                     {title}
                   </h3>
-
-                  <p className="text-sm text-[#5a5f6b] leading-relaxed flex-1">{excerpt}</p>
-
-                  <div
+                  <p className="text-sm text-[#5a5f6b] leading-relaxed line-clamp-3">{excerpt}</p>
+                  <a
+                    href={link ?? '#'}
                     className="inline-flex items-center gap-1.5 text-sm font-semibold mt-2 group-hover:gap-2.5 transition-all"
-                    style={{ color: accentColor }}
+                    style={{ color: meta.accent }}
                   >
                     Leer más
                     <ArrowRight size={13} />
-                  </div>
+                  </a>
                 </div>
               </article>
             );
           })}
+          {visible.length === 0 && (
+            <div className="col-span-full bg-white border border-[#e5e1d8] rounded-sm p-8 text-center text-sm text-[#5a5f6b]">
+              No hay publicaciones para este filtro.
+            </div>
+          )}
         </div>
       </div>
     </section>

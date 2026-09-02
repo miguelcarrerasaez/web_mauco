@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Search, BookOpen, FlaskConical, Dna, HeartPulse, Users, Wind, Brain, ArrowUpRight } from 'lucide-react';
-import type { Publication } from '@/types/mauco';
+import { publications } from '@/data/maucoData';
 
 const researchAreas = [
   { icon: HeartPulse, label: 'Cardiovascular', description: 'Factores de riesgo cardiometabólico y enfermedad cardiovascular.' },
@@ -11,45 +11,8 @@ const researchAreas = [
   { icon: FlaskConical, label: 'Ambiente y exposición', description: 'Exposición ambiental y su impacto en salud.' },
 ];
 
-const publications: Publication[] = [
-  {
-    id: 'pub-1',
-    title: 'Study protocol for the Maule Cohort (MAUCO) of chronic diseases, Chile 2014-2024',
-    authors: ['Ferreccio, C.', 'Roa, J.C.', 'Bambs, C.', 'Vives, A.', 'Corvalán, A.H.'],
-    journal: 'BMC Public Health',
-    year: 2016,
-    doi: '10.1186/s12889-016-3047-8',
-    researchAreas: ['Cardiovascular', 'Cáncer', 'Metabólico'],
-  },
-  {
-    id: 'pub-2',
-    title: 'Inflammatory profiles in women with gallstones at risk of developing gallbladder cancer',
-    authors: ['Jackson, S.S.', 'Van De Wyngard, V.', 'Ferreccio, C.', 'Koshiol, J.'],
-    journal: 'Scientific Reports',
-    year: 2021,
-    doi: '10.1038/s41598-021-83300-2',
-    researchAreas: ['Cáncer'],
-  },
-  {
-    id: 'pub-3',
-    title: 'The association between walking pace and grip strength and all-cause mortality: MAUCO cohort',
-    authors: ['Petermann-Rocha, F.', 'Parra-Soto, S.', 'Ferreccio, C.', 'Celis-Morales, C.'],
-    journal: 'Maturitas',
-    year: 2021,
-    researchAreas: ['Cardiovascular', 'Envejecimiento'],
-  },
-  {
-    id: 'pub-4',
-    title: 'Processed meat consumption and associated factors in Chile: a cross-sectional study nested in the MAUCO cohort',
-    authors: ['Ruedlinger, J.', 'Cid-Ossandón, V.', 'Ferreccio, C.'],
-    journal: 'Frontiers in Public Health',
-    year: 2020,
-    researchAreas: ['Alimentación', 'Metabólico'],
-  },
-];
-
 const years = Array.from(new Set(publications.map(p => p.year))).sort((a, b) => b - a);
-const areas = Array.from(new Set(publications.flatMap(p => p.researchAreas)));
+const areas = Array.from(new Set(publications.flatMap(p => p.researchAreas))).sort();
 export default function ResearchSection() {
   const [query, setQuery] = useState('');
   const [year, setYear] = useState('all');
@@ -132,7 +95,12 @@ export default function ResearchSection() {
               {areas.map(a => <option key={a} value={a}>Área: {a}</option>)}
             </select>
           </div>
-{/* Results */}
+{/* Results summary */}
+          <p className="text-sm text-[#5a5f6b] mb-4">
+            Se muestran {filtered.length} {filtered.length === 1 ? 'publicación' : 'publicaciones'} de {publications.length}.
+          </p>
+
+          {/* Results */}
           <div className="space-y-4">
             {filtered.length === 0 && (
               <div className="bg-white border border-[#e5e1d8] rounded-sm p-8 text-center text-sm text-[#5a5f6b]">
