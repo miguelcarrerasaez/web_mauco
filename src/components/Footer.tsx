@@ -1,4 +1,15 @@
 import { Phone, Mail, MapPin, ExternalLink, Shield, FileText, Lock, ChevronRight } from 'lucide-react';
+import universidadCatolicaLogo from '@/assets/logos/universidad-catolica.png';
+import redcapLogo from '@/assets/logos/redcap.png';
+import conicytLogo from '@/assets/logos/conicyt.png';
+import rstudioLogo from '@/assets/logos/rstudio.png';
+
+const institutionalLogos = [
+  { src: universidadCatolicaLogo, alt: 'Pontificia Universidad Católica de Chile' },
+  { src: redcapLogo, alt: 'REDCap' },
+  { src: conicytLogo, alt: 'CONICYT' },
+  { src: rstudioLogo, alt: 'RStudio' },
+];
 
 const participantLinks = [
   { label: 'Cómo unirme al estudio', href: '#' },
@@ -134,6 +145,25 @@ export default function Footer() {
                 Todos los datos se procesan conforme a la Ley 19.628 y el RGPD.
               </p>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Institutional logos */}
+      <div className="border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="pt-8 text-center text-[11px] font-semibold tracking-widest uppercase text-white/40">
+            Instituciones que hacen posible MAUCO
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-8 py-6">
+            {institutionalLogos.map(({ src, alt }) => (
+              <img
+                key={alt}
+                src={src}
+                alt={alt}
+                className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300"
+              />
+            ))}
           </div>
         </div>
       </div>

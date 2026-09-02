@@ -45,9 +45,11 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
           {/* Logo */}
           <a href="#" className="flex items-center gap-3 shrink-0">
-            <div className="w-9 h-9 bg-[#006380] rounded-sm flex items-center justify-center">
-              <span className="text-white font-bold text-base tracking-tight">M</span>
-            </div>
+            <img
+              src="/mauco-logo.jpeg"
+              alt="MAUCO — Estudio de Cohorte del Maule"
+              className="h-10 w-auto object-contain"
+            />
             <div className="leading-tight">
               <div className="font-bold text-[#006380] text-lg tracking-tight">MAUCO</div>
               <div className="text-[10px] text-[#5a5f6b] tracking-widest uppercase font-medium -mt-0.5 hidden sm:block">Maule Cohort Study</div>
