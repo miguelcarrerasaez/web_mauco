@@ -23,10 +23,10 @@ export default function CollaborationSection() {
   const [active, setActive] = useState('datos');
 
   return (
-    <section className="bg-white py-20 md:py-28" id="colaborar">
+    <section className="bg-white py-10 md:py-12" id="colaborar">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="max-w-3xl mb-14">
+        <div className="max-w-3xl mb-8">
           <div className="inline-flex items-center gap-2 mb-3">
             <div className="w-1.5 h-5 bg-[#f08700] rounded-full" />
             <span className="text-xs font-bold tracking-widest text-[#f08700] uppercase">Colaboración</span>
@@ -40,12 +40,12 @@ export default function CollaborationSection() {
         </div>
 
         {/* Request options */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-16">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
           {requestOptions.map(({ id, icon: Icon, label, description }) => (
             <button
               key={id}
               onClick={() => setActive(id)}
-              className={`group text-left rounded-sm border p-6 transition-all duration-200 ${
+              className={`group text-left rounded-sm border p-5 transition-all duration-200 ${
                 active === id
                   ? 'border-[#006380] bg-[#f4efde] shadow-md'
                   : 'border-[#e5e1d8] bg-white hover:border-[#006380] hover:shadow-sm'
@@ -68,8 +68,8 @@ export default function CollaborationSection() {
         </div>
 
         {/* Access process */}
-        <div className="bg-[#f4efde] border border-[#e5e1d8] rounded-sm p-8 md:p-12">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+        <div className="bg-[#f4efde] border border-[#e5e1d8] rounded-sm p-6 md:p-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
             <div>
               <div className="inline-flex items-center gap-2 mb-2">
                 <div className="w-1.5 h-5 bg-[#08b3e7] rounded-full" />
@@ -93,7 +93,7 @@ export default function CollaborationSection() {
                   <div className="w-9 h-9 bg-[#006380] text-white rounded-sm flex items-center justify-center text-xs font-bold shrink-0">{stepNumber}</div>
                   {stepNumber !== '07' && <div className="flex-1 w-px bg-[#e5e1d8] my-1 hidden sm:block" />}
                 </div>
-                <div className="pb-6">
+                <div className="pb-4">
                   <h4 className="font-bold text-[#1e1f26] text-sm mb-1 flex items-center gap-1.5">
                     <Check size={14} className="text-[#08b3e7]" />
                     {title}

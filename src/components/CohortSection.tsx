@@ -46,9 +46,9 @@ const steps = [
 
 export default function CohortSection() {
   return (
-    <section className="bg-white py-20 md:py-28" id="cohorte">
+    <section className="bg-white py-10 md:py-12" id="cohorte">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mb-14">
+        <div className="max-w-3xl mb-8">
           <div className="inline-flex items-center gap-2 mb-3">
             <div className="w-1.5 h-5 bg-[#006380] rounded-full" />
             <span className="text-xs font-bold tracking-widest text-[#006380] uppercase">La cohorte</span>
@@ -63,7 +63,7 @@ export default function CohortSection() {
           {/* Vertical connector line */}
           <div className="absolute left-[19px] md:left-1/2 top-2 bottom-2 w-px bg-[#e5e1d8] md:-translate-x-1/2" />
 
-          <div className="space-y-8">
+          <div className="space-y-6">
             {steps.map(({ id, icon: Icon, step, title, detail, description }, index) => {
               const reverse = index % 2 === 1;
               return (
@@ -75,7 +75,7 @@ export default function CohortSection() {
 
                   {/* Card */}
                   <div className="ml-14 md:ml-0 md:w-1/2 md:px-8">
-                    <div className="bg-[#f4efde] border border-[#e5e1d8] rounded-sm p-6 hover:shadow-lg hover:border-[#006380] transition-all">
+                    <div className="bg-[#f4efde] border border-[#e5e1d8] rounded-sm p-5 hover:shadow-lg hover:border-[#006380] transition-all">
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-xs font-bold tracking-widest text-[#08b3e7] uppercase">Paso {step}</span>
                       </div>

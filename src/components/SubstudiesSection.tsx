@@ -27,10 +27,10 @@ export default function SubstudiesSection() {
   };
 
   return (
-    <section className="bg-[#f7f4ed] py-20 md:py-28" id="subestudios">
+    <section className="bg-[#f7f4ed] py-10 md:py-12" id="subestudios">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 mb-3">
               <div className="w-1.5 h-5 bg-[#006380] rounded-full" />
@@ -65,14 +65,14 @@ export default function SubstudiesSection() {
         </div>
 
         {/* Sub-studies grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {visible.map(({ id, title, principalInvestigator, objective, date, status: st }) => {
             const meta = statusMeta[st];
             const StatusIcon = meta.icon;
             return (
               <article
                 key={id}
-                className="group bg-white border border-[#e5e1d8] hover:border-[#006380] rounded-sm p-6 flex flex-col gap-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
+                className="group bg-white border border-[#e5e1d8] hover:border-[#006380] rounded-sm p-5 flex flex-col gap-3 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div
@@ -120,7 +120,7 @@ export default function SubstudiesSection() {
 
         {/* Load more button */}
         {visibleCount < filteredData.length && (
-          <div className="flex justify-center mt-10">
+          <div className="flex justify-center mt-8">
             <button
               onClick={() => setVisibleCount(prev => prev + 6)}
               className="inline-flex items-center gap-2 px-6 py-3 bg-[#f08700] hover:bg-[#d97700] text-white text-sm font-bold rounded-sm transition-colors shadow-sm"

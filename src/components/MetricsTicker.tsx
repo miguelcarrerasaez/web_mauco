@@ -24,9 +24,9 @@ const metrics: MetricWithIcon[] = [
 export default function MetricsTicker() {
   return (
     <section className="bg-[#f4efde] border-y border-[#e5e1d8]" id="cifras">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12">
         {/* Section header */}
-        <div className="max-w-3xl mb-12">
+        <div className="max-w-3xl mb-8">
           <div className="inline-flex items-center gap-2 mb-3">
             <div className="w-1.5 h-5 bg-[#006380] rounded-full" />
             <span className="text-xs font-bold tracking-widest text-[#006380] uppercase">MAUCO en cifras</span>
@@ -41,9 +41,9 @@ export default function MetricsTicker() {
         </div>
 
         {/* Metrics grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-5">
           {metrics.map(({ id, icon: Icon, value, label, accent = '#006380' }) => (
-            <div key={id} className="flex flex-col bg-white rounded-sm border border-[#e5e1d8] p-5 md:p-6 gap-3 group hover:border-[#006380] hover:shadow-md transition-all">
+            <div key={id} className="flex flex-col bg-white rounded-sm border border-[#e5e1d8] p-4 md:p-5 gap-2 group hover:border-[#006380] hover:shadow-md transition-all">
               <div
                 className="w-10 h-10 rounded-sm flex items-center justify-center transition-transform group-hover:scale-110"
                 style={{ backgroundColor: `${accent}14`, color: accent }}
@@ -51,7 +51,7 @@ export default function MetricsTicker() {
                 <Icon size={19} strokeWidth={2} />
               </div>
               <div>
-                <div className="text-2xl md:text-3xl font-extrabold text-[#1e1f26] tracking-tight">{value}</div>
+                <div className="text-xl md:text-2xl font-extrabold text-[#1e1f26] tracking-tight">{value}</div>
                 <div className="text-xs font-medium text-[#5a5f6b] mt-1 leading-snug">{label}</div>
               </div>
             </div>

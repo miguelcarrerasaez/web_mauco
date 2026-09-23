@@ -26,10 +26,10 @@ const grouped = categoryOrder
 
 export default function TeamSection() {
   return (
-    <section className="bg-white py-20 md:py-28" id="equipo">
+    <section className="bg-white py-10 md:py-12" id="equipo">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="max-w-3xl mb-14">
+        <div className="max-w-3xl mb-8">
           <div className="inline-flex items-center gap-2 mb-3">
             <div className="w-1.5 h-5 bg-[#006380] rounded-full" />
             <span className="text-xs font-bold tracking-widest text-[#006380] uppercase">Equipo</span>
@@ -51,8 +51,8 @@ export default function TeamSection() {
         {grouped.map(({ cat, members }) => {
           const { accent, icon: CatIcon } = categoryMeta[cat];
           return (
-            <div key={cat} className="mb-12 last:mb-0">
-              <div className="flex items-center gap-3 mb-6">
+            <div key={cat} className="mb-8 last:mb-0">
+              <div className="flex items-center gap-3 mb-4">
                 <div className="w-9 h-9 rounded-sm flex items-center justify-center shrink-0" style={{ backgroundColor: `${accent}14`, color: accent }}>
                   <CatIcon size={17} strokeWidth={1.9} />
                 </div>
@@ -60,11 +60,11 @@ export default function TeamSection() {
                 <span className="text-xs text-[#5a5f6b]">({members.length})</span>
               </div>
 
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 {members.map(m => (
                   <article
                     key={m.id}
-                    className="group bg-[#f7f4ed] border border-[#e5e1d8] hover:border-[#006380] rounded-sm p-5 transition-all hover:shadow-md"
+                    className="group bg-[#f7f4ed] border border-[#e5e1d8] hover:border-[#006380] rounded-sm p-4 transition-all hover:shadow-md"
                   >
                     <div className="flex items-start justify-between mb-3">
                       <div

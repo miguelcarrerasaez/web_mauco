@@ -51,10 +51,10 @@ const resources: Resource[] = [
 
 export default function ResearchersSection() {
   return (
-    <section className="bg-white py-20 md:py-28" id="recursos">
+    <section className="bg-white py-10 md:py-12" id="recursos">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 mb-3">
               <div className="w-1.5 h-5 bg-[#08b3e7] rounded-full" />
@@ -71,7 +71,7 @@ export default function ResearchersSection() {
         </div>
 
         {/* Research areas (tags/badges) */}
-        <div className="flex flex-wrap gap-2 mb-12">
+        <div className="flex flex-wrap gap-2 mb-8">
           {researchAreas.map(area => (
             <span
               key={area}
@@ -83,11 +83,11 @@ export default function ResearchersSection() {
         </div>
 
         {/* Download cards grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {resources.map(({ icon: Icon, badge, title, description, action, accent }) => (
             <article
               key={title}
-              className="group relative bg-[#f7f4ed] border border-[#e5e1d8] hover:border-[#08b3e7] rounded-sm p-6 flex flex-col gap-4 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+              className="group relative bg-[#f7f4ed] border border-[#e5e1d8] hover:border-[#08b3e7] rounded-sm p-5 flex flex-col gap-3 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
             >
               <div className="absolute top-0 inset-x-0 h-0.5 bg-[#08b3e7] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
               <div className="flex items-start justify-between">

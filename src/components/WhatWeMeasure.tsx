@@ -88,9 +88,9 @@ const categories: CategoryWithIcon[] = [
 
 export default function WhatWeMeasure() {
   return (
-    <section className="bg-[#f4efde] py-20 md:py-28">
+    <section className="bg-[#f4efde] py-10 md:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mb-12">
+        <div className="max-w-3xl mb-8">
           <div className="inline-flex items-center gap-2 mb-3">
             <div className="w-1.5 h-5 bg-[#08b3e7] rounded-full" />
             <span className="text-xs font-bold tracking-widest text-[#08b3e7] uppercase">¿Qué medimos?</span>
@@ -103,11 +103,11 @@ export default function WhatWeMeasure() {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {categories.map(({ id, icon: Icon, title, description, tags, accent }) => (
             <article
               key={id}
-              className="group bg-white border border-[#e5e1d8] hover:border-[#006380] rounded-sm p-6 flex flex-col gap-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
+              className="group bg-white border border-[#e5e1d8] hover:border-[#006380] rounded-sm p-5 flex flex-col gap-3 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
             >
               <div
                 className="w-11 h-11 rounded-sm flex items-center justify-center transition-transform group-hover:scale-110"

@@ -40,22 +40,22 @@ export default function ResearchSection() {
   };
 
   return (
-    <section className="bg-[#f4efde] py-20 md:py-28">
+    <section className="bg-[#f4efde] py-10 md:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Research areas */}
-        <div className="mb-16">
-          <div className="max-w-3xl mb-10">
+        <div className="mb-10">
+          <div className="max-w-3xl mb-8">
             <div className="inline-flex items-center gap-2 mb-3">
               <div className="w-1.5 h-5 bg-[#006380] rounded-full" />
               <span className="text-xs font-bold tracking-widest text-[#006380] uppercase">Investigación</span>
             </div>
             <h2 className="text-3xl md:text-4xl font-extrabold text-[#1e1f26] tracking-tight leading-tight">Áreas de investigación</h2>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {researchAreas.map(({ icon: Icon, label, description }) => (
-              <div key={label} className="group bg-white border border-[#e5e1d8] hover:border-[#006380] rounded-sm p-5 transition-all hover:shadow-md">
-                <div className="w-10 h-10 bg-[#006380]/[0.08] text-[#006380] rounded-sm flex items-center justify-center mb-3 group-hover:bg-[#006380] group-hover:text-white transition-colors">
+              <div key={label} className="group bg-white border border-[#e5e1d8] hover:border-[#006380] rounded-sm p-4 transition-all hover:shadow-md">
+                <div className="w-10 h-10 bg-[#006380]/[0.08] text-[#006380] rounded-sm flex items-center justify-center mb-2 group-hover:bg-[#006380] group-hover:text-white transition-colors">
                   <Icon size={18} />
                 </div>
                 <h3 className="font-bold text-[#1e1f26] mb-1">{label}</h3>
@@ -66,7 +66,7 @@ export default function ResearchSection() {
         </div>
 {/* Publications search */}
         <div>
-          <div className="max-w-3xl mb-10">
+          <div className="max-w-3xl mb-8">
             <div className="inline-flex items-center gap-2 mb-3">
               <div className="w-1.5 h-5 bg-[#08b3e7] rounded-full" />
               <span className="text-xs font-bold tracking-widest text-[#08b3e7] uppercase">Publicaciones</span>
@@ -76,7 +76,7 @@ export default function ResearchSection() {
           </div>
 
           {/* Filters */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
             <div className="relative lg:col-span-2">
               <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#5a5f6b]" />
               <input
@@ -109,14 +109,14 @@ export default function ResearchSection() {
           </p>
 
           {/* Results */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             {filtered.length === 0 && (
-              <div className="bg-white border border-[#e5e1d8] rounded-sm p-8 text-center text-sm text-[#5a5f6b]">
+              <div className="bg-white border border-[#e5e1d8] rounded-sm p-6 text-center text-sm text-[#5a5f6b]">
                 No se encontraron publicaciones con los criterios seleccionados.
               </div>
             )}
             {visible.map(({ id, title, authors, journal, year: py, doi, researchAreas: ra }) => (
-              <article key={id} className="group bg-white border border-[#e5e1d8] hover:border-[#006380] rounded-sm p-6 transition-all hover:shadow-md">
+              <article key={id} className="group bg-white border border-[#e5e1d8] hover:border-[#006380] rounded-sm p-5 transition-all hover:shadow-md">
                 <h3 className="font-bold text-[#1e1f26] leading-snug mb-2 group-hover:text-[#006380] transition-colors">{title}</h3>
                 <p className="text-sm text-[#5a5f6b] mb-2">{authors.join(', ')}</p>
                 <div className="flex flex-wrap items-center gap-3 text-xs text-[#5a5f6b]">
@@ -139,7 +139,7 @@ export default function ResearchSection() {
 
           {/* Load more button */}
           {visibleCount < filtered.length && (
-            <div className="flex justify-center mt-8">
+            <div className="flex justify-center mt-6">
               <button
                 onClick={() => setVisibleCount(prev => prev + 6)}
                 className="inline-flex items-center gap-2 px-6 py-3 bg-[#f08700] hover:bg-[#d97700] text-white text-sm font-bold rounded-sm transition-colors shadow-sm"

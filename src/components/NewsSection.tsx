@@ -23,10 +23,13 @@ export default function NewsSection() {
     filter === 'todas' ? newsEvents : newsEvents.filter(item => item.type === filter);
 
   return (
-    <section className="bg-[#f4efde] py-20 md:py-28" id="noticias">
+    <section className="bg-[#f4efde] py-10 md:py-12" id="noticias">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="lg:grid lg:grid-cols-3 lg:gap-10">
+        {/* Sidebar: header + filtros */}
+        <div className="mb-8 lg:mb-0">
         {/* Section header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 lg:flex-col lg:items-start">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 mb-3">
               <div className="w-1.5 h-5 bg-[#f08700] rounded-full" />
@@ -49,7 +52,7 @@ export default function NewsSection() {
         </div>
 
         {/* Filter pills */}
-        <div className="flex flex-wrap gap-2 mb-10" role="group" aria-label="Filtrar por tipo">
+        <div className="flex flex-wrap gap-2 mb-10 lg:mb-0" role="group" aria-label="Filtrar por tipo">
           {filters.map(({ id, label }) => {
             const active = filter === id;
             return (
@@ -68,9 +71,11 @@ export default function NewsSection() {
             );
           })}
         </div>
+        </div>
 
         {/* News/Events grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="lg:col-span-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
           {visible.map(({ id, type, title, excerpt, date, link }) => {
             const meta = typeMeta[type];
             return (
@@ -80,7 +85,7 @@ export default function NewsSection() {
               >
                 {/* Visual header */}
                 <div
-                  className="relative h-40 overflow-hidden text-white flex items-center justify-center"
+                  className="relative h-32 md:h-36 overflow-hidden text-white flex items-center justify-center"
                   style={{ backgroundColor: meta.accent }}
                 >
                   <div className="absolute inset-0 opacity-10 flex items-center justify-center">
@@ -96,7 +101,7 @@ export default function NewsSection() {
                 </div>
 
                 {/* Content */}
-                <div className="flex flex-col flex-1 p-6 gap-3">
+                <div className="flex flex-col flex-1 p-5 gap-3">
                   <div className="flex items-center gap-2 text-xs text-[#5a5f6b]">
                     <Calendar size={12} />
                     <span>{date}</span>
@@ -118,11 +123,13 @@ export default function NewsSection() {
             );
           })}
           {visible.length === 0 && (
-            <div className="col-span-full bg-white border border-[#e5e1d8] rounded-sm p-8 text-center text-sm text-[#5a5f6b]">
+            <div className="col-span-full bg-white border border-[#e5e1d8] rounded-sm p-6 text-center text-sm text-[#5a5f6b]">
               No hay publicaciones para este filtro.
             </div>
           )}
         </div>
+        </div>
+      </div>
       </div>
     </section>
   );

@@ -1,8 +1,8 @@
-import { ArrowRight, ChevronsDown } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[92vh] flex items-center overflow-hidden bg-[#006380]">
+    <section className="relative overflow-hidden bg-[#006380] py-16 md:py-20">
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
@@ -20,7 +20,7 @@ export default function Hero() {
       <div className="absolute right-20 bottom-0 w-64 h-64 bg-[#f08700] opacity-5 rounded-full translate-y-1/3" />
       <div className="absolute left-1/2 top-1/2 w-[800px] h-[800px] border border-white opacity-[0.04] rounded-full -translate-x-1/2 -translate-y-1/2" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 md:py-36">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
           {/* Eyebrow label */}
           <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-8 bg-white/10 border border-white/20 rounded-sm backdrop-blur-sm">
@@ -29,18 +29,18 @@ export default function Hero() {
           </div>
 
           {/* Main headline */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-[1.1] tracking-tight mb-6">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-white leading-[1.1] tracking-tight mb-4">
             MAUCO: Estudio de<br />
             <span className="text-[#08b3e7]">Cohorte del Maule</span>
           </h1>
 
           {/* Subtitle (bajada) */}
-          <p className="text-lg md:text-xl text-white/85 leading-relaxed font-medium mb-5">
+          <p className="text-base md:text-lg text-white/85 leading-relaxed font-medium mb-4">
             Una cohorte poblacional para el estudio de las enfermedades crónicas y sus determinantes en Chile.
           </p>
 
           {/* Description */}
-          <p className="text-white/70 leading-relaxed max-w-2xl mb-10">
+          <p className="text-white/70 leading-relaxed max-w-2xl mb-6">
             MAUCO es una cohorte poblacional prospectiva establecida en Molina, Región del Maule, Chile. Desde 2014,
             el estudio ha seguido a cerca de 10.000 personas, integrando información longitudinal de salud, mediciones
             clínicas, muestras biológicas y vinculación con registros de salud.
@@ -58,7 +58,7 @@ export default function Hero() {
           </div>
 
           {/* Hero footer metrics */}
-          <div className="mt-14 pt-6 border-t border-white/15 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-8">
+          <div className="mt-8 pt-5 border-t border-white/15 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-8">
             <span className="text-xs tracking-widest uppercase text-white/40 font-medium">La cohorte</span>
             <div className="flex flex-wrap gap-x-8 gap-y-2">
               <span className="text-sm text-white/80">
@@ -75,10 +75,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:flex items-center gap-2 text-white/40">
-        <ChevronsDown size={16} className="animate-bounce" />
-      </div>
     </section>
   );
 }

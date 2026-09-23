@@ -32,10 +32,10 @@ const methodologyIcons = [ClipboardList, HeartPulse, TestTube, RefreshCcw];
 
 export default function StudyInfoSection() {
   return (
-    <section className="bg-[#f4efde] py-20 md:py-28" id="info-estudio">
+    <section className="bg-[#f4efde] py-10 md:py-12" id="info-estudio">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="max-w-3xl mb-12">
+        <div className="max-w-3xl mb-8">
           <div className="inline-flex items-center gap-2 mb-3">
             <div className="w-1.5 h-5 bg-[#08b3e7] rounded-full" />
             <span className="text-xs font-bold tracking-widest text-[#08b3e7] uppercase">Información general del estudio</span>
@@ -48,14 +48,14 @@ export default function StudyInfoSection() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-6 items-start">
+        <div className="grid lg:grid-cols-3 gap-4 items-start">
           {panels.map(({ key, title, icon: PanelIcon, accent, description }) => (
             <div
               key={key}
-              className="bg-white border border-[#e5e1d8] hover:border-[#006380] rounded-sm p-6 transition-all hover:shadow-md"
+              className="bg-white border border-[#e5e1d8] hover:border-[#006380] rounded-sm p-5 transition-all hover:shadow-md"
             >
               <div
-                className="w-11 h-11 rounded-sm flex items-center justify-center mb-4"
+                className="w-11 h-11 rounded-sm flex items-center justify-center mb-3"
                 style={{ backgroundColor: `${accent}14`, color: accent }}
               >
                 <PanelIcon size={20} strokeWidth={1.9} />
@@ -63,7 +63,7 @@ export default function StudyInfoSection() {
               <h3 className="font-bold text-[#1e1f26] text-lg mb-1">{title}</h3>
               <p className="text-xs text-[#5a5f6b] leading-relaxed mb-5">{description}</p>
 
-              <div className="space-y-5">
+              <div className="space-y-4">
                 {studyInfo[key].map((section: StudySection, index: number) => (
                   <div key={section.id}>
                     <div className="flex items-center gap-2 mb-2">
@@ -94,7 +94,7 @@ export default function StudyInfoSection() {
 
               {/* Solo en el panel de metodología se muestran los iconos de pasos */}
               {key === 'metodologia' && (
-                <div className="mt-6 flex items-center gap-2 pt-5 border-t border-[#e5e1d8]">
+                <div className="mt-5 flex items-center gap-2 pt-4 border-t border-[#e5e1d8]">
                   {methodologyIcons.map((StepIcon, i) => (
                     <div
                       key={i}
