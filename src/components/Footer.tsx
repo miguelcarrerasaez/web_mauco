@@ -161,7 +161,7 @@ export default function Footer() {
                 key={alt}
                 src={src}
                 alt={alt}
-                className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                className="h-16 md:h-20 w-auto object-contain hover:scale-105 transition-transform duration-300"
               />
             ))}
           </div>
