@@ -40,20 +40,30 @@ export default function BiobankSection() {
             </a>
           </div>
 
-          {/* Right: highlights */}
-          <div className="grid grid-cols-2 gap-4">
-            <div className="col-span-2 bg-white/[0.07] border border-white/15 rounded-sm p-5 text-center">
-              <div className="text-4xl md:text-5xl font-extrabold text-[#f08700] tracking-tight">430.000+</div>
-              <div className="text-white/70 text-sm mt-1">Alícuotas almacenadas</div>
-            </div>
-            {highlights.map(({ icon: Icon, label }) => (
-              <div key={label} className="flex items-center gap-3 bg-white/[0.06] border border-white/10 rounded-sm p-4">
-                <div className="w-9 h-9 bg-white/10 rounded-sm flex items-center justify-center text-[#08b3e7] shrink-0">
-                  <Icon size={17} />
+          {/* Right: imagen real acompañante del biobanco */}
+          <div className="relative overflow-hidden rounded-xl border border-white/20 bg-white/10 aspect-[4/5] group">
+            <img
+              src="/biobanco2.jpeg"
+              alt="Biobanco MAUCO: laboratorio y muestras biológicas"
+              className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#006380]/90 via-[#006380]/40 to-transparent" />
+            {/* Highlights como chips sobre la imagen */}
+            <div className="absolute top-4 right-4 flex flex-col gap-2">
+              {highlights.map(({ icon: Icon, label }) => (
+                <div key={label} className="flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/20 px-3 py-1.5 rounded-sm text-[11px] font-medium text-white">
+                  <Icon size={12} className="text-[#08b3e7]" />
+                  {label}
                 </div>
-                <span className="text-white/85 text-sm font-medium leading-tight">{label}</span>
+              ))}
+            </div>
+            <div className="absolute bottom-0 left-0 w-full p-6 md:p-8">
+              <div className="text-4xl md:text-5xl font-extrabold text-[#f08700] tracking-tight">430.000+</div>
+              <div className="text-white text-sm font-medium mt-1 leading-tight">
+                Alícuotas almacenadas bajo custodia ética
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </div>

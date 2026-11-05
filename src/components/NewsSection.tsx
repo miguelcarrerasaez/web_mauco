@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRight, Calendar, Newspaper, CalendarDays } from 'lucide-react';
+import { ArrowRight, Calendar, Newspaper, CalendarDays, ExternalLink } from 'lucide-react';
 import { newsEvents } from '@/data/maucoData';
 import type { NewsEvent } from '@/types/mauco';
 
@@ -14,6 +14,15 @@ const filters: { id: Filter; label: string }[] = [
 const typeMeta: Record<NewsEvent['type'], { label: string; accent: string }> = {
   news: { label: 'Noticia', accent: '#08b3e7' },
   event: { label: 'Evento', accent: '#f08700' },
+};
+
+const topicById: Record<string, string> = {
+  'ne-1': 'Salud ambiental',
+  'ne-2': 'Comunidad y Medio Ambiente',
+  'ne-3': 'Salud ambiental',
+  'ne-4': 'Cáncer',
+  'ne-5': 'Comunidad',
+  'ne-6': 'Salud renal',
 };
 
 export default function NewsSection() {
@@ -78,6 +87,7 @@ export default function NewsSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
           {visible.map(({ id, type, title, excerpt, date, link }) => {
             const meta = typeMeta[type];
+            const topic = topicById[id];
             return (
               <article
                 key={id}
@@ -106,18 +116,19 @@ export default function NewsSection() {
                     <Calendar size={12} />
                     <span>{date}</span>
                   </div>
+                  <span className="bg-teal-50 text-[#006380] text-xs font-semibold px-2.5 py-1 rounded-full border border-teal-100">{topic}</span>
                   <h3 className="font-bold text-[#1e1f26] leading-snug text-base group-hover:text-[#006380] transition-colors">
                     {title}
                   </h3>
                   <p className="text-sm text-[#5a5f6b] leading-relaxed line-clamp-3">{excerpt}</p>
-                  <a
-                    href={link ?? '#'}
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold mt-2 group-hover:gap-2.5 transition-all"
-                    style={{ color: meta.accent }}
-                  >
-                    Leer más
-                    <ArrowRight size={13} />
-                  </a>
+                  <div className="mt-2 flex justify-end gap-2">
+                    <a
+                      href={link ?? '#'}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm bg-[#f4efde] text-[#006380] text-xs font-semibold hover:bg-[#e7e0cf] transition-colors"
+                    >
+                      Leer más <ExternalLink size={13} />
+                    </a>
+                  </div>
                 </div>
               </article>
             );

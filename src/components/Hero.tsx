@@ -3,24 +3,20 @@ import { ArrowRight } from 'lucide-react';
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-[#006380] py-16 md:py-20">
-      {/* Background pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 25% 50%, #ffffff 1px, transparent 1px),
-                            radial-gradient(circle at 75% 20%, #ffffff 1px, transparent 1px)`,
-          backgroundSize: '40px 40px, 60px 60px',
-        }} />
-      </div>
+      {/* Immersive background image (real asset from public/) */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: `url('/S-mauco4.jpg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
+      />
+      {/* Degradado overlay para garantizar legibilidad del texto blanco sobre la foto */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-r from-[#006380]/95 via-[#006380]/80 to-transparent" />
 
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#004c5f] via-[#006380] to-[#005570]" />
-
-      {/* Decorative shapes */}
-      <div className="absolute right-0 top-0 w-96 h-96 bg-[#08b3e7] opacity-5 rounded-full -translate-y-1/2 translate-x-1/3" />
-      <div className="absolute right-20 bottom-0 w-64 h-64 bg-[#f08700] opacity-5 rounded-full translate-y-1/3" />
-      <div className="absolute left-1/2 top-1/2 w-[800px] h-[800px] border border-white opacity-[0.04] rounded-full -translate-x-1/2 -translate-y-1/2" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
           {/* Eyebrow label */}
           <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-8 bg-white/10 border border-white/20 rounded-sm backdrop-blur-sm">
@@ -29,7 +25,7 @@ export default function Hero() {
           </div>
 
           {/* Main headline */}
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-white leading-[1.1] tracking-tight mb-4">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-[1.1] tracking-tight mb-4">
             MAUCO: Estudio de<br />
             <span className="text-[#08b3e7]">Cohorte del Maule</span>
           </h1>

@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Search, BookOpen, FlaskConical, Dna, HeartPulse, Users, Wind, Brain, ArrowUpRight } from 'lucide-react';
+import { Search, BookOpen, FlaskConical, Dna, HeartPulse, Users, Wind, Brain, FileText } from 'lucide-react';
 import { publications } from '@/data/maucoData';
 
 const researchAreas = [
@@ -115,23 +115,28 @@ export default function ResearchSection() {
                 No se encontraron publicaciones con los criterios seleccionados.
               </div>
             )}
-            {visible.map(({ id, title, authors, journal, year: py, doi, researchAreas: ra }) => (
-              <article key={id} className="group bg-white border border-[#e5e1d8] hover:border-[#006380] rounded-sm p-5 transition-all hover:shadow-md">
+            {visible.map(({ id, title, authors, journal, year: py, doi, url, researchAreas: ra }) => (
+              <article key={id} className="group bg-white border border-[#e5e1d8] hover:border-[#006380] rounded-sm p-5 transition-all hover:shadow-md flex flex-col">
                 <h3 className="font-bold text-[#1e1f26] leading-snug mb-2 group-hover:text-[#006380] transition-colors">{title}</h3>
                 <p className="text-sm text-[#5a5f6b] mb-2">{authors.join(', ')}</p>
                 <div className="flex flex-wrap items-center gap-3 text-xs text-[#5a5f6b]">
                   <span className="inline-flex items-center gap-1.5"><BookOpen size={13} /> {journal}</span>
                   <span>{py}</span>
-                  {doi && (
-                    <a href={`https://doi.org/${doi}`} target="_blank" rel="noreferrer" className="text-[#08b3e7] hover:underline inline-flex items-center gap-1">
-                      DOI <ArrowUpRight size={12} />
-                    </a>
-                  )}
                 </div>
                 <div className="flex flex-wrap gap-1.5 mt-3">
                   {ra.map(item => (
-                    <span key={item} className="text-[11px] font-medium px-2 py-0.5 rounded-sm bg-[#006380]/[0.08] text-[#006380]">{item}</span>
+                    <span key={item} className="bg-teal-50 text-[#006380] text-xs font-semibold px-2.5 py-1 rounded-full border border-teal-100">{item}</span>
                   ))}
+                </div>
+                <div className="mt-4 flex justify-end gap-2">
+                  <a
+                    href={doi ? `https://doi.org/${doi}` : (url ?? '#')}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm bg-[#f4efde] text-[#006380] text-xs font-semibold hover:bg-[#e7e0cf] transition-colors"
+                  >
+                    Ver publicación <FileText size={13} />
+                  </a>
                 </div>
               </article>
             ))}

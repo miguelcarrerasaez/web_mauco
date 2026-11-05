@@ -47,6 +47,23 @@ export default function TeamSection() {
           </div>
         </div>
 
+        {/* Cabecera visual: grupo de investigación (fotos reales) */}
+        <div className="mt-6 grid sm:grid-cols-2 gap-4 rounded-xl overflow-hidden border border-[#e5e1d8] shadow-sm">
+          <img
+            src="/equipo1.jpeg"
+            alt="Equipo de investigación MAUCO"
+            className="w-full h-48 md:h-60 object-cover object-center"
+            loading="lazy"
+          />
+          <img
+            src="/equipo2.jpg"
+            alt="Grupo MAUCO en terreno"
+            className="w-full h-48 md:h-60 object-cover object-center"
+            loading="lazy"
+          />
+        </div>
+        <p className="mt-3 text-sm text-[#5a5f6b]">Equipo de investigación MAUCO — Molina, Región del Maule.</p>
+
         {/* Team by category */}
         {grouped.map(({ cat, members }) => {
           const { accent, icon: CatIcon } = categoryMeta[cat];
