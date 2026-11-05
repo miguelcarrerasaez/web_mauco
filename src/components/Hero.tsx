@@ -1,76 +1,53 @@
-import { ArrowRight } from 'lucide-react';
+import React from 'react';
+import { ArrowRight, Database, HeartPulse } from 'lucide-react';
+import { ActiveView } from '../types/mauco';
 
-export default function Hero() {
+interface HeroProps {
+  setActiveView: (view: ActiveView) => void;
+}
+
+export const Hero: React.FC<HeroProps> = ({ setActiveView }) => {
   return (
-    <section className="relative overflow-hidden bg-[#006380] py-16 md:py-20">
-      {/* Immersive background image (real asset from public/) */}
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: `url('/S-mauco4.jpg')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-        }}
+    <section className="relative bg-[#006380] text-white py-16 lg:py-24 overflow-hidden">
+      {/* Background Image with Gradient Overlay */}
+      <div 
+        className="absolute inset-0 z-0 bg-cover bg-center opacity-30"
+        style={{ backgroundImage: `url('/S-mauco4.jpg')` }}
       />
-      {/* Degradado overlay para garantizar legibilidad del texto blanco sobre la foto */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-r from-[#006380]/95 via-[#006380]/80 to-transparent" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-r from-[#006380] via-[#006380]/90 to-transparent" />
 
-      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-8">
         <div className="max-w-3xl">
-          {/* Eyebrow label */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-8 bg-white/10 border border-white/20 rounded-sm backdrop-blur-sm">
-            <span className="w-2 h-2 rounded-full bg-[#f08700] animate-pulse" />
-            <span className="text-white/80 text-xs font-semibold tracking-widest uppercase">Estudio de cohorte en curso · Molina, Región del Maule</span>
+          <div className="inline-flex items-center gap-2 bg-[#08b3e7]/20 border border-[#08b3e7]/40 px-3 py-1 rounded-full text-xs font-semibold text-[#08b3e7] mb-6">
+            <span>Estudio de Cohorte de Base Poblacional</span>
           </div>
-
-          {/* Main headline */}
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-[1.1] tracking-tight mb-4">
-            MAUCO: Estudio de<br />
-            <span className="text-[#08b3e7]">Cohorte del Maule</span>
+          
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-none mb-6">
+            Salud pública y ciencia de datos para el futuro de Chile.
           </h1>
 
-          {/* Subtitle (bajada) */}
-          <p className="text-base md:text-lg text-white/85 leading-relaxed font-medium mb-4">
-            Una cohorte poblacional para el estudio de las enfermedades crónicas y sus determinantes en Chile.
+          <p className="text-base sm:text-xl text-gray-200 mb-8 leading-relaxed">
+            MAUCO evalúa a más de 10.000 adultos en Molina para comprender los factores ambientales, genéticos y de estilo de vida en el desarrollo de enfermedades crónicas.
           </p>
 
-          {/* Description */}
-          <p className="text-white/70 leading-relaxed max-w-2xl mb-6">
-            MAUCO es una cohorte poblacional prospectiva establecida en Molina, Región del Maule, Chile. Desde 2014,
-            el estudio ha seguido a cerca de 10.000 personas, integrando información longitudinal de salud, mediciones
-            clínicas, muestras biológicas y vinculación con registros de salud.
-          </p>
-
-          {/* CTA buttons */}
-          <div className="flex flex-col sm:flex-row gap-3">
-            <a
-              href="#cohorte"
-              className="group inline-flex items-center justify-center gap-2.5 px-7 py-3.5 bg-[#f08700] hover:bg-[#d97700] text-white font-semibold text-sm rounded-sm transition-all duration-200 shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30 hover:-translate-y-0.5"
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+            <button 
+              onClick={() => setActiveView('participantes')}
+              className="bg-[#f08700] hover:bg-[#d67800] text-white px-6 py-4 rounded-sm font-bold text-sm tracking-wider uppercase flex items-center justify-center gap-2 transition-all shadow-md"
             >
-              Conocer la cohorte
-              <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-            </a>
-          </div>
-
-          {/* Hero footer metrics */}
-          <div className="mt-8 pt-5 border-t border-white/15 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-8">
-            <span className="text-xs tracking-widest uppercase text-white/40 font-medium">La cohorte</span>
-            <div className="flex flex-wrap gap-x-8 gap-y-2">
-              <span className="text-sm text-white/80">
-                <strong className="text-white font-bold">9.462</strong> participantes
-              </span>
-              <span className="text-sm text-white/80">
-                <strong className="text-white font-bold">+10 años</strong> de seguimiento
-              </span>
-              <span className="text-sm text-white/80">
-                <strong className="text-white font-bold">+430.000</strong> alícuotas almacenadas
-              </span>
-            </div>
+              <HeartPulse className="w-5 h-5" /> Descubrir cómo participar
+            </button>
+            <button 
+              onClick={() => setActiveView('investigadores')}
+              className="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-6 py-4 rounded-sm font-bold text-sm tracking-wider uppercase flex items-center justify-center gap-2 transition-all backdrop-blur-sm"
+            >
+              <Database className="w-5 h-5 text-[#08b3e7]" /> Explorar catálogo de datos
+            </button>
           </div>
         </div>
       </div>
-
     </section>
   );
-}
+};
+
+export default Hero;
